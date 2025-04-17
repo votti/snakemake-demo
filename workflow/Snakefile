@@ -5,7 +5,9 @@
 
 rule all:
     input:
-        "results/visualization/penguins.png"
+        "results/visualization/penguins.png",
+        "results/visualization/penguins_w3_h2.png",
+        expand("results/visualization/penguins_w{plot_width}_h{plot_height}.png", plot_width=[3, 4], plot_height=[2, 3])
 
 rule get_data:
     output:
@@ -27,3 +29,16 @@ rule visualize_graph:
         fig="results/visualization/penguins.png"
     script:
         "scripts/visualize_penguins.R"
+        
+rule visualize_graph_size:
+    conda:
+        "envs/visualization.yaml"
+    input:
+        data="results/input/penguins.csv"
+    output:
+        fig="results/visualization/penguins_w{plot_width}_h{plot_height}.png"
+    script:
+        "scripts/visualize_penguins_size.R"
+
+
+
