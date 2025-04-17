@@ -1,0 +1,7 @@
+name: snakemake-test
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - bioconda::snakemake
+  - bioconda::snakemake-executor-plugin-slurm

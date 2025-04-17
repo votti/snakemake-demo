@@ -2,3 +2,43 @@
 # Please follow the best practices: 
 # https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html,
 # in particular regarding the standardized folder structure mentioned there. 
+
+rule all:
+    input:
+        "results/visualization/penguins.png",
+        "results/visualization/penguins_w3_h2.png",
+        expand("results/visualization/penguins_w{plot_width}_h{plot_height}.png", plot_width=[3, 4], plot_height=[2, 3])
+
+rule get_data:
+    output:
+        "results/input/penguins.csv"
+    params:
+        url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/refs/heads/master/penguins.csv"
+    shell:
+        """
+        # download the url to the output file
+        wget {params.url} -O {output}
+        """
+
+rule visualize_graph:
+    conda:
+        "envs/visualization.yaml"
+    input:
+        data="results/input/penguins.csv"
+    output:
+        fig=report("fig1.svg","results/visualization/penguins.png", category="visualization")
+    script:
+        "scripts/visualize_penguins.R"
+        
+rule visualize_graph_size:
+    conda:
+        "envs/visualization.yaml"
+    input:
+        data="results/input/penguins.csv"
+    output:
+        fig="results/visualization/penguins_w{plot_width}_h{plot_height}.png"
+    script:
+        "scripts/visualize_penguins_size.R"
+
+
+

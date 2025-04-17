@@ -1,0 +1,13 @@
+---
+cores: 4
+jobs: 500
+executor: slurm
+keep-incomplete: true
+rerun-incomplete: true
+keep-going: true
+use-conda: true
+use-singularity: true
+latency-wait: 90
+default-resources:
+    mem_mb: 4000
+    runtime: '30'
