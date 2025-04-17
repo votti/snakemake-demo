@@ -2,3 +2,13 @@
 # Please follow the best practices: 
 # https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html,
 # in particular regarding the standardized folder structure mentioned there. 
+rule get_data:
+    output:
+        "results/input/penguins.csv"
+    params:
+        url = "https://raw.githubusercontent.com/mwaskom/seaborn-data/refs/heads/master/penguins.csv"
+    shell:
+        """
+        # download the url to the output file
+        wget {params.url} -O {output}
+        """
