@@ -26,7 +26,7 @@ rule visualize_graph:
     input:
         data="results/input/penguins.csv"
     output:
-        fig="results/visualization/penguins.png"
+        fig=report("fig1.svg","results/visualization/penguins.png", category="visualization")
     script:
         "scripts/visualize_penguins.R"
         

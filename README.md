@@ -34,3 +34,9 @@ To use the slurm profile (eg on science cluster)
 ```
 snakemake --profile=profile/slurm
 ```
+
+### Create an interactive report
+
+```
+snakemake --profile=profile/local --report=results/report.html
+```
