@@ -2,6 +2,11 @@
 # Please follow the best practices: 
 # https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html,
 # in particular regarding the standardized folder structure mentioned there. 
+
+rule all:
+    input:
+        "results/visualization/penguins.png"
+
 rule get_data:
     output:
         "results/input/penguins.csv"
@@ -12,3 +17,13 @@ rule get_data:
         # download the url to the output file
         wget {params.url} -O {output}
         """
+
+rule visualize_graph:
+    conda:
+        "envs/visualization.yaml"
+    input:
+        data="results/input/penguins.csv"
+    output:
+        fig="results/visualization/penguins.png"
+    script:
+        "scripts/visualize_penguins.R"
