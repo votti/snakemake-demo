@@ -1,0 +1,7 @@
+name: snakemake-test
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - bioconda::snakemake
